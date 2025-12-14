@@ -90,19 +90,21 @@
       document.getElementById("result").innerText = "❌ Salah!";
     }
 
-    index++;
+    index++; 
 
     if (index < questions.length) {
       setTimeout(loadQuestion, 800);
     } else {
-      document.getElementById("question").innerText = "Kuis selesai 🎉";
-      document.getElementById("answers").innerHTML = "";
-      document.getElementById("score").innerText =
-        "Skor kamu: " + score + " / " + questions.length;
+      const finalScore = score + " / " + questions.length;
+localStorage.setItem("nilai_kuis", finalScore);
+
+document.getElementById("score").innerText =
+  "Skor kamu: " + finalScore + " (tersimpan)";
+
     }
   }
 
-  loadQuestion();
+  loadQuestion(); 
       </script>
                                   
   
