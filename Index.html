@@ -43,7 +43,23 @@
   <p id="result" class="mt-4 font-bold"></p>
   <p id="score" class="mt-2"></p>
 </section>
+<section class="bg-white p-4 rounded-xl max-w-md mx-auto mt-6">
+  <h2 class="text-lg font-bold mb-2">AI Pembuat Soal</h2>
 
+  <input id="subject" placeholder="Pelajaran (contoh: IPA)"
+    class="w-full border p-2 mb-2 rounded" />
+
+  <input id="topic" placeholder="Topik (contoh: Sistem Tata Surya)"
+    class="w-full border p-2 mb-2 rounded" />
+
+  <button onclick="generateAI()"
+    class="w-full bg-green-600 text-white p-2 rounded">
+    Buat Soal dengan AI 🤖
+  </button>
+
+  <pre id="aiResult" class="text-sm mt-3 whitespace-pre-wrap"></pre>
+  </section>
+    
 <script>
   const questions = [
     {
@@ -105,7 +121,21 @@ document.getElementById("score").innerText =
   }
 
   loadQuestion(); 
-      </script>
+      </script>async function generateAI() {
+  const subject = document.getElementById("subject").value;
+  const topic = document.getElementById("topic").value;
+
+  document.getElementById("aiResult").innerText = "⏳ Membuat soal...";
+
+  const res = await fetch("/.netlify/functions/groq", {
+    method: "POST",
+    body: JSON.stringify({ subject, topic })
+  });
+
+  const data = await res.text();
+  document.getElementById("aiResult").innerText = data;
+}
+  
                                   
   
 </body>
