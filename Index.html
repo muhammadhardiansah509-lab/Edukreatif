@@ -138,7 +138,11 @@ let nilaiMurid = JSON.parse(localStorage.getItem("nilaiMurid")) || [];
 function tambahNilai() {
   const nama = document.getElementById("namaMurid").value;
   const nilai = parseInt(document.getElementById("nilaiMurid").value);
-
+<button onclick="hapusSemua()"
+  class="w-full bg-red-600 text-white p-2 rounded mt-2">
+  Hapus Semua Nilai
+</button>
+    
   if (!nama || isNaN(nilai)) {
     alert("Isi nama dan nilai dengan benar");
     return;
@@ -176,7 +180,14 @@ function tampilkanNilai() {
 }
 
 tampilkanNilai();
-</script>
+function hapusSemua() {
+  if (confirm("Yakin ingin menghapus semua nilai?")) {
+    nilaiMurid = [];
+    localStorage.removeItem("nilaiMurid");
+    tampilkanNilai();
+  }
+  }
+          </script>
 
 </body>
                                      </html>
