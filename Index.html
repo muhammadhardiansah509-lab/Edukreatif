@@ -61,7 +61,7 @@
   </section>
     
 <script>
-  const questions = [
+  let questions = [
     {
       q: "Ibu kota Indonesia adalah?",
       a: ["Jakarta", "Bandung", "Surabaya"],
@@ -121,7 +121,7 @@ document.getElementById("score").innerText =
   }
 
   loadQuestion(); 
-      </script>async function generateAI() {
+      </script> async function generateAI() {
   const subject = document.getElementById("subject").value;
   const topic = document.getElementById("topic").value;
 
