@@ -34,7 +34,40 @@
   <footer class="text-center text-sm opacity-70 p-4">
     © 2025 EduKreatif
   </footer>
+<section class="bg-white text-black p-6 rounded-xl max-w-md mx-auto mt-6">
+  <h2 class="text-xl font-bold mb-4">Kuis Cepat</h2>
 
+  <p id="question" class="mb-4">
+    Ibu kota Indonesia adalah?
+  </p>
+
+  <div class="space-y-2">
+    <button onclick="answer(true)"
+      class="w-full bg-indigo-500 text-white p-2 rounded">
+      Jakarta
+    </button>
+
+    <button onclick="answer(false)"
+      class="w-full bg-gray-300 p-2 rounded">
+      Bandung
+    </button>
+
+    <button onclick="answer(false)"
+      class="w-full bg-gray-300 p-2 rounded">
+      Surabaya
+    </button>
+  </div>
+
+  <p id="result" class="mt-4 font-bold"></p>
+</section>
+
+<script>
+  function answer(correct) {
+    document.getElementById("result").innerText =
+      correct ? "✅ Benar!" : "❌ Salah!";
+  }
+        </script>
+  
 </body>
   </html>
   
