@@ -16,17 +16,15 @@ export async function handler(event) {
         },
         {
           role: "user",
-          content: `Buatkan 3 soal pilihan ganda untuk pelajaran ${subject} dengan topik ${topic}. Sertakan jawaban benar.`
-        }
-      ]
-    })
-  });
-
-  const data = await response.json();
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify(data.choices[0].message.content)
-  };
-        }
-  
+          content: {
+  role: "user",
+  content: `Buatkan 3 soal pilihan ganda untuk pelajaran ${subject} dengan topik ${topic}.
+Format HARUS JSON seperti ini:
+[
+  {
+    "q": "pertanyaan",
+    "a": ["opsi1","opsi2","opsi3"],
+    "correct": 0
+  }
+]`
+}
