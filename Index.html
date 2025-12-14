@@ -35,38 +35,76 @@
     © 2025 EduKreatif
   </footer>
 <section class="bg-white text-black p-6 rounded-xl max-w-md mx-auto mt-6">
-  <h2 class="text-xl font-bold mb-4">Kuis Cepat</h2>
+  <h2 class="text-xl font-bold mb-4">Kuis EduKreatif</h2>
 
-  <p id="question" class="mb-4">
-    Ibu kota Indonesia adalah?
-  </p>
-
-  <div class="space-y-2">
-    <button onclick="answer(true)"
-      class="w-full bg-indigo-500 text-white p-2 rounded">
-      Jakarta
-    </button>
-
-    <button onclick="answer(false)"
-      class="w-full bg-gray-300 p-2 rounded">
-      Bandung
-    </button>
-
-    <button onclick="answer(false)"
-      class="w-full bg-gray-300 p-2 rounded">
-      Surabaya
-    </button>
-  </div>
+  <p id="question" class="mb-4"></p>
+  <div id="answers" class="space-y-2"></div>
 
   <p id="result" class="mt-4 font-bold"></p>
+  <p id="score" class="mt-2"></p>
 </section>
 
 <script>
-  function answer(correct) {
-    document.getElementById("result").innerText =
-      correct ? "✅ Benar!" : "❌ Salah!";
+  const questions = [
+    {
+      q: "Ibu kota Indonesia adalah?",
+      a: ["Jakarta", "Bandung", "Surabaya"],
+      correct: 0
+    },
+    {
+      q: "2 + 2 = ?",
+      a: ["3", "4", "5"],
+      correct: 1
+    },
+    {
+      q: "Warna bendera Indonesia adalah?",
+      a: ["Merah Putih", "Biru Putih", "Merah Biru"],
+      correct: 0
+    }
+  ];
+
+  let index = 0;
+  let score = 0;
+
+  function loadQuestion() {
+    document.getElementById("result").innerText = "";
+    document.getElementById("question").innerText = questions[index].q;
+
+    const answersDiv = document.getElementById("answers");
+    answersDiv.innerHTML = "";
+
+    questions[index].a.forEach((ans, i) => {
+      const btn = document.createElement("button");
+      btn.innerText = ans;
+      btn.className = "w-full bg-indigo-500 text-white p-2 rounded";
+      btn.onclick = () => checkAnswer(i);
+      answersDiv.appendChild(btn);
+    });
   }
-        </script>
+
+  function checkAnswer(i) {
+    if (i === questions[index].correct) {
+      score++;
+      document.getElementById("result").innerText = "✅ Benar!";
+    } else {
+      document.getElementById("result").innerText = "❌ Salah!";
+    }
+
+    index++;
+
+    if (index < questions.length) {
+      setTimeout(loadQuestion, 800);
+    } else {
+      document.getElementById("question").innerText = "Kuis selesai 🎉";
+      document.getElementById("answers").innerHTML = "";
+      document.getElementById("score").innerText =
+        "Skor kamu: " + score + " / " + questions.length;
+    }
+  }
+
+  loadQuestion();
+      </script>
+                                  
   
 </body>
   </html>
