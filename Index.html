@@ -59,7 +59,26 @@
 
   <pre id="aiResult" class="text-sm mt-3 whitespace-pre-wrap"></pre>
   </section>
-    
+    section class="bg-white text-black p-6 rounded-xl max-w-md mx-auto mt-6">
+  <h2 class="text-xl font-bold mb-4">📊 Manajer Nilai Murid</h2>
+
+  <input id="namaMurid"
+    placeholder="Nama Murid"
+    class="w-full border p-2 mb-2 rounded" />
+
+  <input id="nilaiMurid" type="number"
+    placeholder="Nilai (0–100)"
+    class="w-full border p-2 mb-2 rounded" />
+
+  <button onclick="tambahNilai()"
+    class="w-full bg-blue-600 text-white p-2 rounded">
+    Tambah Nilai
+  </button>
+
+  <ul id="daftarNilai" class="mt-4 space-y-2 text-sm"></ul>
+
+  <p id="rataRata" class="mt-4 font-bold"></p>
+  </section>
 <script>
   let questions = [
     {
@@ -114,6 +133,49 @@
   }
 
   loadQuestion();
+let nilaiMurid = JSON.parse(localStorage.getItem("nilaiMurid")) || [];
+
+function tambahNilai() {
+  const nama = document.getElementById("namaMurid").value;
+  const nilai = parseInt(document.getElementById("nilaiMurid").value);
+
+  if (!nama || isNaN(nilai)) {
+    alert("Isi nama dan nilai dengan benar");
+    return;
+  }
+
+  nilaiMurid.push({ nama, nilai });
+  localStorage.setItem("nilaiMurid", JSON.stringify(nilaiMurid));
+
+  document.getElementById("namaMurid").value = "";
+  document.getElementById("nilaiMurid").value = "";
+
+  tampilkanNilai();
+}
+
+function tampilkanNilai() {
+  const list = document.getElementById("daftarNilai");
+  list.innerHTML = "";
+
+  let total = 0;
+
+  nilaiMurid.forEach((item) => {
+    total += item.nilai;
+
+    const li = document.createElement("li");
+    li.textContent = `${item.nama} — ${item.nilai}`;
+    list.appendChild(li);
+  });
+
+  const rata = nilaiMurid.length
+    ? (total / nilaiMurid.length).toFixed(2)
+    : 0;
+
+  document.getElementById("rataRata").innerText =
+    "Rata-rata nilai: " + rata;
+}
+
+tampilkanNilai();
 </script>
 
 </body>
