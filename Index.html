@@ -189,6 +189,28 @@ function hapusSemua() {
   }
           </script>
 
+<section class="bg-white text-black p-6 rounded-xl max-w-md mx-auto mt-6">
+  <h2 class="text-xl font-bold mb-4">📚 Rekap Ulangan</h2>
+
+  <input id="mapel"
+    placeholder="Mata Pelajaran (contoh: IPA)"
+    class="w-full border p-2 mb-2 rounded" />
+
+  <input id="namaUlangan"
+    placeholder="Nama Murid"
+    class="w-full border p-2 mb-2 rounded" />
+
+  <input id="nilaiUlangan" type="number"
+    placeholder="Nilai"
+    class="w-full border p-2 mb-2 rounded" />
+
+  <button onclick="tambahUlangan()"
+    class="w-full bg-indigo-600 text-white p-2 rounded">
+    Tambah Nilai Ulangan
+  </button>
+
+  <ul id="listUlangan" class="mt-4 space-y-2 text-sm"></ul>
+</section>
 </body>
                                      </html>
     
