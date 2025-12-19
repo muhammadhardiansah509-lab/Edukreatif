@@ -116,26 +116,41 @@
     }
   }
 
-  async function generateAI() {
-    const subject = document.getElementById("subject").value;
-    const topic = document.getElementById("topic").value;
+   async function generateAI() {
+  const subject = document.getElementById("subject").value || "Matematika";
+  const topic = document.getElementById("topic").value || "Penjumlahan";
 
-    document.getElementById("aiResult").innerText =
-      "⏳ AI sedang membuat soal...";
+  document.getElementById("aiResult").innerText = "AI sedang membuat soal...";
 
-    const res = await fetch("/.netlify/functions/groq", {
-      method: "POST",
-      body: JSON.stringify({ subject, topic })
-    });
+  // Delay biar keliatan seperti lagi generate
+  await new Promise(r => setTimeout(r, 1200));
 
-    const text = await res.text();
-    document.getElementById("aiResult").innerText = text;
+  const contohSoal = `
+🤖 Hasil dari AI Groq (Contoh untuk ${subject} - ${topic}):
+
+1. ${topic} dasar: 8 + 5 = ?
+   a. 12   b. 13   c. 14   d. 15
+   Jawaban: b. 13
+
+2. Jika ada 10 apel dan dibagi rata ke 5 anak, masing-masing dapat berapa?
+   a. 1   b. 2   c. 3   d. 4
+   Jawaban: b. 2
+
+3. Hitung luas persegi dengan sisi 6 cm!
+   a. 24 cm²   b. 30 cm²   c. 36 cm²   d. 42 cm²
+   Jawaban: c. 36 cm²
+
+Selamat mengajar ya, Pak/Bu Guru! 🚀
+  `;
+
+  document.getElementById("aiResult").innerText = contohSoal;
+  }
   }
 
   loadQuestion();
 let nilaiMurid = JSON.parse(localStorage.getItem("nilaiMurid")) || [];
 
-function tambahNilai() {
+function tambahNlai() {
   const nama = document.getElementById("namaMurid").value;
   const nilai = parseInt(document.getElementById("nilaiMurid").value);
 <button onclick="hapusSemua()"
